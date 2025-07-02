@@ -83,7 +83,7 @@
     "@types/xregexp": "^4.3.0"
   },
   "nodecg": {
-    "compatibleRange": "^1.7.2",
+    "compatibleRange": "^1.7.4",
     "dashboardPanels": [
       {
         "name": "runback",
