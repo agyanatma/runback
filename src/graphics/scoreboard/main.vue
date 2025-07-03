@@ -129,8 +129,16 @@
               {{ display.players[0].gamertag }}
             </span>
 
-            <span class="gamertag-text">
-              {{ is_grand_final && !this.display.is_winner[0] ? "(L)" : "" }}
+            <span
+              id="p1-side-wrapper"
+              class="gamertag-text"
+              :class="[
+                ani.in.side && is_grand_final ? 'p1-side-in' : '',
+                !ani.visible.side ? 'p1-side-hidden' : '',
+                ani.out.side ? 'p1-side-out' : '',
+              ]"
+            >
+              {{ is_grand_final && !display.is_winner[0] ? "[L]" : "" }}
             </span>
           </fitty>
         </div>
@@ -194,8 +202,16 @@
               {{ display.players[1].gamertag }}
             </span>
 
-            <span class="gamertag-text">
-              {{ is_grand_final && !this.display.is_winner[1] ? "(L)" : "" }}
+            <span
+              id="p2-side-wrapper"
+              class="gamertag-text"
+              :class="[
+                ani.in.side && is_grand_final ? 'p2-side-in' : '',
+                !ani.visible.side ? 'p2-side-hidden' : '',
+                ani.out.side ? 'p2-side-out' : '',
+              ]"
+            >
+              {{ is_grand_final && !display.is_winner[1] ? "[L]" : "" }}
             </span>
           </fitty>
         </div>
@@ -407,8 +423,8 @@ export default class App extends Vue {
 
   is_winners_text(is_winner: boolean): string {
     return is_winner
-      ? this.rules.winners_abbreviation
-      : this.rules.losers_abbreviation
+      ? `[${this.rules.winners_abbreviation}]`
+      : `[${this.rules.losers_abbreviation}]`
   }
 
   get is_sides_visible(): boolean {
@@ -707,7 +723,7 @@ export default class App extends Vue {
   --back-panel-width: 596.6px;
 
   --name-panel-height: 50px;
-  --name-panel-width: 673px;
+  --name-panel-width: 604px;
   --name-panel-offset: calc(var(--name-panel-width) * 0.95 * -1);
   --name-panel-p1-mask-start: polygon(0 0, 15% 0, 15% 100%, 0 100%);
   --name-panel-p2-mask-start: polygon(85% 0, 100% 0, 100% 100%, 85% 100%);
@@ -727,14 +743,14 @@ export default class App extends Vue {
 
   --name-text-width: calc(var(--name-panel-width) * 0.845);
   --name-text-height: calc(var(--name-panel-height) * 0.8);
-  --name-text-offset-x: calc(var(--name-panel-width) * 0.325);
+  --name-text-offset-x: calc(var(--name-panel-width) * 0.375);
   --name-text-offset-y: calc(
     var(--name-panel-height) * 0.5 - (var(--name-text-height) * 0.5)
   );
 
   --games-text-width: calc(var(--name-panel-width) * 0.11);
   --games-text-height: calc(var(--name-panel-height) * 0.8);
-  --games-text-offset-x: calc(var(--name-panel-width) * 0.35);
+  --games-text-offset-x: calc(var(--name-panel-width) * 0.375);
   --games-text-offset-y: calc(
     var(--name-panel-height) * 0.5 - (var(--games-text-height) * 0.5)
   );
@@ -857,11 +873,11 @@ img {
 }
 
 #p1-side-wrapper {
-  left: var(--side-end-x);
+  /* left: var(--side-end-x); */
 }
 
 #p2-side-wrapper {
-  right: var(--side-end-x);
+  /* right: var(--side-end-x); */
 }
 
 .hidden {
@@ -869,11 +885,11 @@ img {
 }
 
 .p1-side-hidden {
-  left: var(--side-start-x) !important;
+  opacity: 0 !important;
 }
 
 .p2-side-hidden {
-  right: var(--side-start-x) !important;
+  opacity: 0 !important;
 }
 
 .main-hidden {
@@ -881,7 +897,7 @@ img {
 }
 
 .p1-name-hidden {
-  clip-path: var(--name-panel-p1-mask-start);
+  top: calc(var(--name-panel-height) * -1) !important;
 }
 
 .p1-flag-hidden {
@@ -893,7 +909,7 @@ img {
 }
 
 .p2-name-hidden {
-  clip-path: var(--name-panel-p2-mask-start);
+  top: calc(var(--name-panel-height) * -1) !important;
 }
 
 .side-wrapper {
@@ -929,6 +945,7 @@ img {
 }
 
 .flag-wrapper {
+  display: none;
   position: absolute;
   height: var(--flag-height);
   width: var(--flag-width);
@@ -1097,45 +1114,45 @@ img {
 
 @keyframes ani-p1-name-in {
   0% {
-    left: 10%;
-    clip-path: var(--name-panel-p1-mask-start);
+    top: calc(var(--name-panel-height) * -1);
+    /* clip-path: var(--name-panel-p1-mask-start); */
   }
   100% {
-    left: var(--name-panel-offset);
-    clip-path: var(--name-panel-mask-end);
+    top: 0px;
+    /* clip-path: var(--name-panel-mask-end); */
   }
 }
 
 @keyframes ani-p1-name-out {
   0% {
-    left: var(--name-panel-offset);
-    clip-path: var(--name-panel-mask-end);
+    top: 0px;
+    /* clip-path: var(--name-panel-p1-mask-start); */
   }
   100% {
-    left: 10%;
-    clip-path: var(--name-panel-p1-mask-start);
+    top: calc(var(--name-panel-height) * -1);
+    /* clip-path: var(--name-panel-mask-end); */
   }
 }
 
 @keyframes ani-p2-name-in {
   0% {
-    right: 10%;
-    clip-path: var(--name-panel-p2-mask-start);
+    top: calc(var(--name-panel-height) * -1);
+    /* clip-path: var(--name-panel-p1-mask-start); */
   }
   100% {
-    right: var(--name-panel-offset);
-    clip-path: var(--name-panel-mask-end);
+    top: 0px;
+    /* clip-path: var(--name-panel-mask-end); */
   }
 }
 
 @keyframes ani-p2-name-out {
   0% {
-    right: var(--name-panel-offset);
-    clip-path: var(--name-panel-mask-end);
+    top: 0px;
+    /* clip-path: var(--name-panel-p1-mask-start); */
   }
   100% {
-    right: 10%;
-    clip-path: var(--name-panel-p2-mask-start);
+    top: calc(var(--name-panel-height) * -1);
+    /* clip-path: var(--name-panel-mask-end); */
   }
 }
 
@@ -1177,37 +1194,37 @@ img {
 
 @keyframes ani-p1-side-in {
   0% {
-    left: var(--side-start-x);
+    opacity: 0;
   }
   100% {
-    left: var(--side-end-x);
+    opacity: 1;
   }
 }
 
 @keyframes ani-p1-side-out {
   0% {
-    left: var(--side-end-x);
+    opacity: 1;
   }
   100% {
-    left: var(--side-start-x);
+    opacity: 0;
   }
 }
 
 @keyframes ani-p2-side-in {
   0% {
-    right: var(--side-start-x);
+    opacity: 0;
   }
   100% {
-    right: var(--side-end-x);
+    opacity: 1;
   }
 }
 
 @keyframes ani-p2-side-out {
   0% {
-    right: var(--side-end-x);
+    opacity: 1;
   }
   100% {
-    right: var(--side-start-x);
+    opacity: 0;
   }
 }
 </style>
