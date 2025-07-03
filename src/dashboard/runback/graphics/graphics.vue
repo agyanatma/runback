@@ -36,7 +36,8 @@ import { Vue, Component } from "vue-property-decorator"
 
 @Component
 export default class extends Vue {
-  readonly base_url: string = "http://localhost:9090/bundles/runback/graphics/"
+  readonly base_url: string =
+    window.location.origin + "/bundles/runback/graphics/"
   readonly width = 1920
   readonly height = 1080
   readonly drag_offset = 30
