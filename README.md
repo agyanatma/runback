@@ -60,7 +60,7 @@ Runback is a broadcast graphics system designed for fighting games tournaments, 
 - Player import and export
 - Player detail overrides for on-the-fly editing
 - Auto gamertag Latinization for non-Latin scripts
-- smash.gg integration
+- start.gg integration
   - Import tournament entrant data
 - Light and dark mode
 - Windows, macOS, Linux support
@@ -144,12 +144,12 @@ To get a local copy up and running follow these simple steps.
   - Refresh browser when scene becomes available to **ON**
 - [Screenshot](https://i.imgur.com/AsOmUPY.png) for reference
 
-### Setup smash.gg integration
+### Setup start.gg integration
 
-- Create a [smash.gg API key](https://developer.smash.gg/docs/authentication)
+- Create a [start.gg API key](https://developer.start.gg/docs/authentication)
 - Enter the key in Settings→Set API Keys
 
-### Import players from smash.gg
+### Import players from start.gg
 
 - Open the Dashboard tab
 - Click "Set Tournament" and enter the tournament URL

@@ -71,7 +71,7 @@
                       "
                       :type="show_smash_gg_api_key ? 'text' : 'password'"
                       :rules="[smash_gg_api_key_rules.min]"
-                      label="Smash.gg"
+                      label="start.gg"
                       counter
                       @click:append="
                         show_smash_gg_api_key = !show_smash_gg_api_key

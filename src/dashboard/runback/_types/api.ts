@@ -1,6 +1,6 @@
 export class ApiProvider {
   static readonly Unset = new ApiProvider(0, "Unset")
-  static readonly Smash = new ApiProvider(1, "smash.gg")
+  static readonly Smash = new ApiProvider(1, "start.gg")
 
   private constructor(
     public readonly value: number,
@@ -34,7 +34,7 @@ export class Api {
       const hostname = new URL(tourney_url).hostname
 
       switch (hostname) {
-        case "smash.gg":
+        case "start.gg":
           return ApiProvider.Smash
       }
     } catch (e) {}
@@ -49,7 +49,7 @@ export class Api {
     try {
       const url_components = new URL(tourney_url).pathname.split("/")
 
-      // smash.gg URL format: https://smash.gg/tournament/${tourney_url}
+      // start.gg URL format: https://start.gg/tournament/${tourney_url}
       switch (api_provider.value) {
         case ApiProvider.Smash.value:
           if (url_components[1] !== "tournament") {

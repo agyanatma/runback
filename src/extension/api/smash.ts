@@ -58,7 +58,7 @@ async function send_query(
   variables: any,
   api_key: string
 ): Promise<Response> {
-  const post: any = await got.post("https://api.smash.gg/gql/alpha", {
+  const post: any = await got.post("https://api.start.gg/gql/alpha", {
     json: {
       query: query,
       variables: variables,
